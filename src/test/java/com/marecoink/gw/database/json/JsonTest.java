@@ -24,4 +24,21 @@ class JsonTest {
         assertEquals(pojo.getStatus(), "Success");
     }
 
+    @Test
+    void toJson() {
+        SimpleTestCaseJsonPOJO pojo = new SimpleTestCaseJsonPOJO();
+        pojo.setStatus("Testing 123");
+        JsonNode node = Json.toJson(pojo);
+        assertEquals(node.get("status").asText(), "Testing 123");
+    }
+
+    @Test
+    void stringify() throws JsonProcessingException {
+        SimpleTestCaseJsonPOJO pojo = new SimpleTestCaseJsonPOJO();
+        pojo.setStatus("Testing 123");
+        JsonNode node = Json.toJson(pojo);
+
+        System.out.println(Json.stringify(node));
+        System.out.println(Json.prettyPrint(node));
+    }
 }
