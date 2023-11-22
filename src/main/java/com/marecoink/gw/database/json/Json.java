@@ -26,13 +26,20 @@ public class Json {
     }
 
     public static String stringify(JsonNode node) throws JsonProcessingException {
-        ObjectWriter objectWriter = objectMapper.writer();
-        return objectWriter.writeValueAsString(node);
+        return generateString(node, false);
     }
 
     public static String prettyPrint(JsonNode node) throws JsonProcessingException {
-        ObjectWriter objectWriter = objectMapper.writer();
-        objectWriter = objectWriter.with(SerializationFeature.INDENT_OUTPUT);
-        return objectWriter.writeValueAsString(node);
+        return generateString(node, true);
     }
+
+    private static String generateString(JsonNode node, boolean pretty) throws JsonProcessingException {
+        ObjectWriter objectWriter = objectMapper.writer();
+        if (pretty) {
+            objectWriter = objectWriter.with(SerializationFeature.INDENT_OUTPUT);
+        }
+        return objectWriter.writeValueAsString(node);
+
+    }
+
 }
