@@ -21,7 +21,7 @@ class JsonTest {
     void fromJson() throws JsonProcessingException {
         JsonNode node = Json.parse(simpleTestCaseJsonSource);
         SimpleTestCaseJsonPOJO pojo = Json.fromJson(node, SimpleTestCaseJsonPOJO.class);
-        assertEquals(pojo.status, "Success");
+        assertEquals(pojo.getStatus(), "Success");
     }
 
 }
