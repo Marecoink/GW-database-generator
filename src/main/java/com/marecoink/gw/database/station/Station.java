@@ -1,13 +1,12 @@
-package com.marecoink.gw.database;
+package com.marecoink.gw.database.station;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
-
-@Entity(name = "Station")
+@Entity
 public class Station {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "no", updatable = false, nullable = false)
     private long no;
     private String name;
@@ -22,7 +21,8 @@ public class Station {
     private boolean humidity;
     private boolean sun;
 
-    public Station(long no, String name, boolean active, boolean rain, boolean water, boolean flow, boolean winddir, boolean windlevel, boolean temp, boolean pressure, boolean humidity, boolean sun) {
+    public Station(long no, String name, boolean active, boolean rain, boolean water, boolean flow,
+                   boolean winddir, boolean windlevel, boolean temp, boolean pressure, boolean humidity, boolean sun) {
         this.no = no;
         this.name = name;
         this.active = active;
@@ -36,22 +36,22 @@ public class Station {
         this.humidity = humidity;
         this.sun = sun;
     }
-    @Override
-    public String toString() {
-        return "Station{" +
-                "no=" + no +
-                ", name='" + name + '\'' +
-                ", active=" + active +
-                ", rain=" + rain +
-                ", water=" + water +
-                ", flow=" + flow +
-                ", winddir=" + winddir +
-                ", windlevel=" + windlevel +
-                ", temp=" + temp +
-                ", pressure=" + pressure +
-                ", humidity=" + humidity +
-                ", sun=" + sun +
-                '}';
+
+    public Station() {
+    }
+
+    public Station(String name, boolean active, boolean rain, boolean water, boolean flow, boolean winddir, boolean windlevel, boolean temp, boolean pressure, boolean humidity, boolean sun) {
+        this.name = name;
+        this.active = active;
+        this.rain = rain;
+        this.water = water;
+        this.flow = flow;
+        this.winddir = winddir;
+        this.windlevel = windlevel;
+        this.temp = temp;
+        this.pressure = pressure;
+        this.humidity = humidity;
+        this.sun = sun;
     }
 
     public long getNo() {
@@ -150,5 +150,22 @@ public class Station {
         this.sun = sun;
     }
 
+    @Override
+    public String toString() {
+        return "Station{" +
+                "no=" + no +
+                ", name='" + name + '\'' +
+                ", active=" + active +
+                ", rain=" + rain +
+                ", water=" + water +
+                ", flow=" + flow +
+                ", winddir=" + winddir +
+                ", windlevel=" + windlevel +
+                ", temp=" + temp +
+                ", pressure=" + pressure +
+                ", humidity=" + humidity +
+                ", sun=" + sun +
+                '}';
+    }
 
 }
