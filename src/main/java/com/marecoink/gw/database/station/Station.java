@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 
 @Entity
 public class Station {
-
     @Id
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "no", updatable = false, nullable = false)
