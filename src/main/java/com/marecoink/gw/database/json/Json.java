@@ -1,7 +1,10 @@
 package com.marecoink.gw.database.json;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.*;
+
+import java.io.IOException;
 
 public class Json {
 
@@ -19,6 +22,10 @@ public class Json {
 
     public static <A> A fromJson(JsonNode node, Class<A> clazz) throws JsonProcessingException {
         return objectMapper.treeToValue(node, clazz);
+    }
+
+    public static <A> A fromJson(JsonNode node, TypeReference<A> typeReference) throws IOException {
+        return objectMapper.readValue(objectMapper.treeAsTokens(node), typeReference);
     }
 
     public static JsonNode toJson(Object a) {

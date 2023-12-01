@@ -50,12 +50,11 @@ public class JsonPlaceholderService {
             String responseBody = responseEntity.getBody();
 
             if (responseBody != null) {
-                ObjectMapper objectMapper = new ObjectMapper();
-                JsonNode rootNode = objectMapper.readTree(responseBody);
+              JsonNode rootNode = Json.parse(responseBody);
+
                 if (rootNode.has("data") && rootNode.get("data").isArray()) {
                     JsonNode dataNode = rootNode.get("data");
-                    return objectMapper.convertValue(dataNode, new TypeReference<List<Station>>() {
-                    });
+                    return Json.fromJson(dataNode, new TypeReference<List<Station>>() {});
                 }
             }
         } catch (Exception e) {
