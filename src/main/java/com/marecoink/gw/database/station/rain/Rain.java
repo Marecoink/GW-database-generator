@@ -24,6 +24,12 @@ public class Rain {
     @Column(name = "rain_value")
     private double value;
 
+    public Rain(Station station, LocalDate date, double value) {
+        this.station = station;
+        this.date = date;
+        this.value = value;
+    }
+
     public static class RainId implements Serializable {
         private Long station;  // Corresponds to the 'station_no' column
         private LocalDate date;
