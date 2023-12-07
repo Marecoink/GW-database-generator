@@ -1,21 +1,15 @@
 package com.marecoink.gw.database.station;
 
-import com.marecoink.gw.database.json.Json;
 import com.marecoink.gw.database.json.JsonPlaceholderService;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 @Configuration
 public class GWConfig {
-
-    private Json json = new Json();
 
     @Bean
     RestTemplate restTemplate() {
@@ -33,6 +27,7 @@ public class GWConfig {
             gWRepository.saveAll(stations);
         };
     }
+}
 //    @Bean
 
 //    CommandLineRunner commandLineRunner(GWRepository repository) {
@@ -55,4 +50,4 @@ public class GWConfig {
 //            repository.saveAll(List.of(stationX));
 //        };
 //    }
-}
+

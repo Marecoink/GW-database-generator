@@ -1,12 +1,17 @@
 package com.marecoink.gw.database.station;
 
+import com.marecoink.gw.database.station.rain.Rain;
 import jakarta.persistence.*;
 
+import java.util.List;
+
+
 @Entity
+@Table(name = "station")
 public class Station {
     @Id
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "no", updatable = false, nullable = false)
+    @Column(name = "no", updatable = false, nullable = false, unique = true)
     private long no;
     private String name;
     private boolean active;
@@ -19,6 +24,9 @@ public class Station {
     private boolean pressure;
     private boolean humidity;
     private boolean sun;
+
+    @OneToMany(mappedBy = "station", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Rain> rainData;
 
     public Station(long no, String name, boolean active, boolean rain, boolean water, boolean flow,
                    boolean winddir, boolean windlevel, boolean temp, boolean pressure, boolean humidity, boolean sun) {
@@ -147,6 +155,14 @@ public class Station {
 
     public void setSun(boolean sun) {
         this.sun = sun;
+    }
+
+    public List<Rain> getRainData() {
+        return rainData;
+    }
+
+    public void setRainData(List<Rain> rainData) {
+        this.rainData = rainData;
     }
 
     @Override

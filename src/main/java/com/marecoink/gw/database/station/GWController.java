@@ -21,8 +21,8 @@ public class GWController {
         return gWService.getStations();
     }
 
-    @PostMapping
-    public void addNewStation(@RequestBody Station station) {
-        gWService.addNewStation(station);
-    }
+//    @PostMapping
+//    public void addNewStation(@RequestBody Station station) {
+//        gWService.addNewStation(station);
+//    }
 }
