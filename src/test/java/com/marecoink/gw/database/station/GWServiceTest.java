@@ -9,6 +9,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.time.LocalDate;
@@ -89,7 +90,7 @@ class GWServiceTest {
         verify(gWRepository).findStationByNo(stationNo);
         verify(rainRepository).findRainDataByStationAndDate(station, date);
 
-        assertEquals(200, result.getStatusCodeValue());
+        assertEquals(HttpStatus.OK, result.getStatusCode());
         List<Rain> rainData = result.getBody();
         assertEquals(1, rainData.size());
         assertEquals(expectedRain, rainData.get(0));
