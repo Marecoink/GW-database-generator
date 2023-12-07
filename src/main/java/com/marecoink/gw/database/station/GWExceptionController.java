@@ -12,14 +12,14 @@ import java.util.Date;
 @RestControllerAdvice
 public class GWExceptionController {
 
-    @ExceptionHandler(Exception.class) // Handle any generic exception
-    public ResponseEntity<ErrorResponse> handleException(Exception ex, WebRequest request) {
+    @ExceptionHandler(StationNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleStationNotFoundException(StationNotFoundException ex, WebRequest request) {
         ErrorResponse errorResponse = new ErrorResponse(
-                HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                HttpStatus.NOT_FOUND.value(),
                 new Date(),
                 ex.getMessage(),
                 request.getDescription(false));
-        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
 
     static class ErrorResponse {
@@ -51,4 +51,11 @@ public class GWExceptionController {
             return details;
         }
     }
+
+    public static class StationNotFoundException extends RuntimeException {
+        public StationNotFoundException(String message) {
+            super(message);
+        }
+    }
 }
+

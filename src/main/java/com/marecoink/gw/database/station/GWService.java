@@ -33,7 +33,7 @@ public class GWService {
     public ResponseEntity<List<Rain>> getRainDataForStation(Long no, String dateString) {
         try {
             Station station = gWRepository.findStationByNo(no)
-                    .orElseThrow(() -> new RuntimeException("Station not found with no: " + no));
+                    .orElseThrow(() -> new GWExceptionController.StationNotFoundException("Station not found with no: " + no));
 
             LocalDate date = LocalDate.parse(dateString);
             List<Rain> rainData = rainRepository.findRainDataByStationAndDate(station, date);
