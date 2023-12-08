@@ -3,6 +3,7 @@ package com.marecoink.gw.database.station;
 import com.marecoink.gw.database.station.rain.Rain;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -26,10 +27,18 @@ public class Station {
     private boolean sun;
 
     @OneToMany(mappedBy = "station", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Rain> rainData;
+    private List<Rain> rainData = new ArrayList<>();
+
+    public Station() {
+    }
 
     public Station(long no, String name, boolean active, boolean rain, boolean water, boolean flow,
                    boolean winddir, boolean windlevel, boolean temp, boolean pressure, boolean humidity, boolean sun) {
+        this(no, name, active, rain, water, flow, winddir, windlevel, temp, pressure, humidity, sun, new ArrayList<>());
+    }
+
+    public Station(long no, String name, boolean active, boolean rain, boolean water, boolean flow,
+                   boolean winddir, boolean windlevel, boolean temp, boolean pressure, boolean humidity, boolean sun, List<Rain> rainData) {
         this.no = no;
         this.name = name;
         this.active = active;
@@ -42,23 +51,7 @@ public class Station {
         this.pressure = pressure;
         this.humidity = humidity;
         this.sun = sun;
-    }
-
-    public Station() {
-    }
-
-    public Station(String name, boolean active, boolean rain, boolean water, boolean flow, boolean winddir, boolean windlevel, boolean temp, boolean pressure, boolean humidity, boolean sun) {
-        this.name = name;
-        this.active = active;
-        this.rain = rain;
-        this.water = water;
-        this.flow = flow;
-        this.winddir = winddir;
-        this.windlevel = windlevel;
-        this.temp = temp;
-        this.pressure = pressure;
-        this.humidity = humidity;
-        this.sun = sun;
+        this.rainData = rainData;
     }
 
     public long getNo() {
